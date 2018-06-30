@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.yhan.fitmate"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    //main application --[]
+    arch_version = '1.1.1'
+    arch_room_version = '1.1.1'
+    appCompat_version = '1.0.0-alpha3'
+    constraintLayout_version = '1.1.2'
+    archComponents_version = '1.1.1'
+    glide_version = '4.6.1'
+    daggerVersion = '2.11'
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '3.10.0'
+    //main application --]]
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //main application start --[[
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
+    implementation "androidx.appcompat:appcompat:$appCompat_version"
+    implementation "androidx.legacy:legacy-support-v4:$appCompat_version"
+    implementation "androidx.recyclerview:recyclerview:$appCompat_version"
+    implementation "com.google.android.material:material:$appCompat_version"
+    implementation "androidx.cardview:cardview:$appCompat_version"
+    implementation "android.arch.lifecycle:extensions:$archComponents_version"
+    implementation "com.google.android.material:material:$appCompat_version"
+    kapt "android.arch.lifecycle:compiler:$archComponents_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+
+    compileOnly "javax.annotation:jsr250-api:1.0"
+    compileOnly "javax.inject:javax.inject:1"
+
+    implementation "android.arch.persistence.room:runtime:$arch_room_version"
+    kapt "android.arch.persistence.room:compiler:$arch_room_version"
+    //main application end --]]
+
+    // rx 관련 --[[
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
+    // --]]
+
+    //test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
