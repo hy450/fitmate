@@ -9,4 +9,15 @@
     <color name="colorTextSecondary">#7f1a18</color>
 
     <color name="translucentBackground">#ED000000</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="main_text_color">#212121</color>
+    <color name="normal_member_color">#e2e2e2</color>
+    <color name="center_member_color">#e2e2e2</color>
+    <color name="gx_member_color">#ff9804</color>
+    <color name="pt_member_color">#00a2ff</color>
+
 </resources>

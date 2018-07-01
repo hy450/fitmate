@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:paddingStart="35dp"
+    android:paddingEnd="35dp"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
+    >
+    
+    <TextView
+        android:paddingStart="13dp"
+        android:id="@+id/centerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/main_text_color"
+        android:text="올바른짐"
+        />
+    
+    <TextView
+        android:paddingStart="13dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:id="@+id/centerAddress"
+        android:layout_below="@+id/centerName"
+        android:textSize="12sp"
+        android:textColor="#aaa6a6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="경기 화성시 동탄환대로 692 ACE 프라자 3층"
+        />
+
+
+</RelativeLayout>

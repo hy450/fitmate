@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yhan.fitmate.core.di.viewmodel
+package com.yhan.fitmate.feature.login
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.yhan.fitmate.feature.login.CenterSearchViewModel
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoMap
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Module
-abstract class ViewModelModule {
-    @Binds
-    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(CenterSearchViewModel::class)
-    abstract  fun bindsCenterSearchViewModel(centerSearchViewModel: CenterSearchViewModel) : ViewModel
-
-
+@Singleton
+class Authenticator
+@Inject constructor(){
+    //Learning purpose: We assume the user is always logged in
+    //Here you should put your own logic to return whether the user
+    //is authenticated or not
+    fun userLoggedIn() = false
 }

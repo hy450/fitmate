@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yhan.fitmate.core.di
+package com.yhan.fitmate.core.navigation
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.yhan.fitmate.AndroidApplication
-import com.yhan.fitmate.core.di.viewmodel.ViewModelModule
-import com.yhan.fitmate.core.navigation.RouteActivity
-import com.yhan.fitmate.feature.login.LoginFragment
-import dagger.Component
-import javax.inject.Singleton
+import com.yhan.fitmate.core.di.ApplicationComponent
+import javax.inject.Inject
 
-@Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
-interface ApplicationComponent {
-    fun inject(application: AndroidApplication)
-    fun inject(routeActivity: RouteActivity)
+class RouteActivity : AppCompatActivity() {
 
-    fun inject(loginFragment: LoginFragment)
-    
+    private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
+        (application as AndroidApplication).appComponent
+    }
+
+    @Inject internal lateinit var navigator: Navigator
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appComponent.inject(this)
+        navigator.showMain(this)
+    }
 }
