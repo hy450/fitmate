@@ -13,8 +13,8 @@ class CenterSearchViewModel
 
     fun loadCenterList(keyword: String, pageIdx: Int = 1) {
 
-        val hashMap = hashMapOf<String,Any>("keyword" to keyword, "pageIdx" to pageIdx)
-        getCenter(hashMap) {
+        //val hashMap = hashMapOf<String,Any>("keyword" to keyword, "pageIdx" to pageIdx)
+        getCenter( GetCenter.Params(keyword,pageIdx)) {
             it.either(::handleFailure, ::handleCenterList)
         }
     }

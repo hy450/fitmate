@@ -61,11 +61,15 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
 
+    //dagger 관련 --[[
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
-
+    //implementation "com.google.dagger:dagger-android:$daggerVersion"
+    //implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     compileOnly "javax.annotation:jsr250-api:1.0"
     compileOnly "javax.inject:javax.inject:1"
+    //dagger 관련 --]]
 
     implementation "android.arch.persistence.room:runtime:$arch_room_version"
     kapt "android.arch.persistence.room:compiler:$arch_room_version"
@@ -81,6 +85,8 @@ dependencies {
 
     //test
     testImplementation 'junit:junit:4.12'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation 'org.amshove.kluent:kluent:1.14'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
 

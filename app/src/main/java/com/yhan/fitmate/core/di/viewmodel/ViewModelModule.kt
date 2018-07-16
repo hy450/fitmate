@@ -18,6 +18,7 @@ package com.yhan.fitmate.core.di.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.yhan.fitmate.feature.login.CenterSearchViewModel
+import com.yhan.fitmate.feature.login.LoginViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -31,6 +32,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CenterSearchViewModel::class)
     abstract  fun bindsCenterSearchViewModel(centerSearchViewModel: CenterSearchViewModel) : ViewModel
+
+    @Binds @IntoMap @ViewModelKey(LoginViewModel::class)
+    abstract  fun bindsLoginViewModel( loginViewModel: LoginViewModel) : ViewModel
 
 
 }

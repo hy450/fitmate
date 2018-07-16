@@ -25,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import androidx.recyclerview.widget.DiffUtil
-
+import com.jakewharton.rxbinding2.view.focusChanges
+import com.jakewharton.rxbinding2.widget.textChanges
 
 
 /**
@@ -36,11 +37,13 @@ class LoginFragment : BaseFragment() {
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
-    @Inject lateinit var searchCenterResultViewModel : CenterSearchViewModel
+    @Inject lateinit var searchCenterResultViewModel: CenterSearchViewModel
+    @Inject lateinit var loginViewModel: LoginViewModel
+    private var mSeletableCenter: CenterInfo? = null
 
     private val centerSrchResultRecyclerAdapter by lazy {
         CenterSrchResultRecyclerAdapter(context!!) {
-            //mSeletableCenter = it
+            mSeletableCenter = it
             searchTv.setText(it.gym_name)
             if( phone.text.toString().isEmpty()) {
                 phone.requestFocus()
@@ -49,7 +52,7 @@ class LoginFragment : BaseFragment() {
                 imm.hideSoftInputFromWindow(searchTv.windowToken, 0)
                 searchTv.clearFocus()
             }
-            //hideSearchView()
+            hideSearchView()
         }
 
     }
@@ -64,6 +67,15 @@ class LoginFragment : BaseFragment() {
             observe(centers, ::renderCenterList)
             failure(failure, ::handleFail)
         }
+
+
+        loginViewModel = viewModel(viewModelFactory) {
+            observe(userInfo) {
+                //
+            }
+            failure( failure, ::handleFail)
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,12 +94,14 @@ class LoginFragment : BaseFragment() {
     private fun regBtnClickListener() {
         // 로그인 버튼 클릭
         loginBtn.setOnClickListener {
+            //todo validation check
 
+            loginViewModel.centerAuth(mSeletableCenter!!.gym_cd!!, phone.toString())
         }
     }
 
     private fun renderCenterList(centers: List<CenterInfo>?) {
-        debug("renderCenterList")
+        debug("renderCenterList")!!
         val diffUtilCallback = CenterInfoDiffCallback(centerSrchResultRecyclerAdapter.centers, centers?:emptyList())
         val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
         centerSrchResultRecyclerAdapter.centers.clear()
@@ -101,6 +115,28 @@ class LoginFragment : BaseFragment() {
 
     private fun regCenterSearchListener() {
 
+        searchTv.focusChanges().subscribe {
+
+            // focus 를 획득함. 새로 검색을 할려고 함. 이전에 선택한 센터 삭제
+            if( it ) mSeletableCenter = null
+
+            val keyword = searchTv.text.toString()
+            if( it && keyword.isNotEmpty() ) {
+                searchTv.setSelection(keyword.length)
+                showSearchView()
+            }else {
+                hideSearchView()
+            }
+        }.addTo(disposables)
+
+        searchTv.textChanges().subscribe{
+            if( searchTv.text.toString().isNotEmpty()) {
+                showSearchView()
+            }else {
+                hideSearchView()
+            }
+        }.addTo(disposables)
+
         RxTextView.textChanges(searchTv).debounce(100, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .map{ it.toString() }
@@ -110,5 +146,16 @@ class LoginFragment : BaseFragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe().addTo(disposables)
 
+    }
+
+    private fun showSearchView() {
+        //termsLy.visibility = View.INVISIBLE
+        //complBtn.visibility = View.INVISIBLE
+        centerSrchResultList.visibility = View.VISIBLE
+    }
+    private fun hideSearchView() {
+        //termsLy.visibility = View.VISIBLE
+        //complBtn.visibility = View.VISIBLE
+        centerSrchResultList.visibility = View.INVISIBLE
     }
 }

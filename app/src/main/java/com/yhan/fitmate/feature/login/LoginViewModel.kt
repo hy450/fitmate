@@ -1,6 +1,7 @@
 package com.yhan.fitmate.feature.login
 
 
+import androidx.lifecycle.MutableLiveData
 import com.yhan.fitmate.core.extension.debug
 import com.yhan.fitmate.core.platform.BaseViewModel
 import com.yhan.fitmate.domain.GetUser
@@ -16,6 +17,8 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(private val getUser: GetUser) : BaseViewModel()
 {
+
+    var userInfo: MutableLiveData<UserInfo> = MutableLiveData()
     // 센터로 로그인 인증 진행
     fun centerAuth(auth_num: String, phone: String) {
         val params = HashMap<String,String>()
@@ -28,10 +31,8 @@ class LoginViewModel
     }
 
     private fun handleLoginResult( userInfo: UserInfo) {
-
         debug(userInfo.toString())
-
-
+        this.userInfo.value = userInfo
     }
 
 }
