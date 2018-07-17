@@ -25,11 +25,11 @@ ext {
     //main application --[]
     arch_version = '1.1.1'
     arch_room_version = '1.1.1'
-    appCompat_version = '1.0.0-alpha3'
+    appCompat_version = '1.0.0-beta01'
     constraintLayout_version = '1.1.2'
     archComponents_version = '1.1.1'
     glide_version = '4.6.1'
-    daggerVersion = '2.11'
+    daggerVersion = '2.16'
     retrofitVersion = '2.3.0'
     okhttpVersion = '3.10.0'
     //main application --]]
@@ -63,10 +63,10 @@ dependencies {
 
     //dagger 관련 --[[
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    //kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
-    //implementation "com.google.dagger:dagger-android:$daggerVersion"
-    //implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     compileOnly "javax.annotation:jsr250-api:1.0"
     compileOnly "javax.inject:javax.inject:1"
     //dagger 관련 --]]

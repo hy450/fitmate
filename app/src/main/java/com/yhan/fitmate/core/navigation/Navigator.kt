@@ -16,7 +16,6 @@
 package com.yhan.fitmate.core.navigation
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import com.yhan.fitmate.feature.login.Authenticator
 import com.yhan.fitmate.feature.login.LoginActivity

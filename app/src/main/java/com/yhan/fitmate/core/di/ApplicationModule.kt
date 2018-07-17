@@ -15,11 +15,12 @@
  */
 package com.yhan.fitmate.core.di
 
+import android.app.Application
 import android.content.Context
-import com.yhan.fitmate.AndroidApplication
 import com.yhan.fitmate.BuildConfig
 import com.yhan.fitmate.data.CenterRepository
 import com.yhan.fitmate.data.UserRepository
+import com.yhan.fitmate.feature.login.LoginFragmentComponent
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,10 +30,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
-class ApplicationModule(private val application: AndroidApplication) {
+@Module( subcomponents = [RouteActivityComponent::class, LoginFragmentComponent::class])
+class ApplicationModule {
 
-    @Provides @Singleton fun provideApplicationContext(): Context = application
+    @Provides @Singleton fun provideApplicationContext(application: Application): Context = application
 
     @Provides @Singleton fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()

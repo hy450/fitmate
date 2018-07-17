@@ -19,6 +19,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yhan.fitmate.AndroidApplication
 import com.yhan.fitmate.core.di.ApplicationComponent
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class RouteActivity : AppCompatActivity() {
@@ -30,8 +31,9 @@ class RouteActivity : AppCompatActivity() {
     @Inject internal lateinit var navigator: Navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
+        //appComponent.inject(this)
         navigator.showMain(this)
     }
 }

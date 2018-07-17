@@ -7,8 +7,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jakewharton.rxbinding2.view.focusChanges
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.jakewharton.rxbinding2.widget.textChanges
 import com.yhan.fitmate.R
 import com.yhan.fitmate.core.exception.Failure
 import com.yhan.fitmate.core.extension.debug
@@ -17,6 +20,7 @@ import com.yhan.fitmate.core.extension.observe
 import com.yhan.fitmate.core.extension.viewModel
 import com.yhan.fitmate.core.platform.BaseFragment
 import com.yhan.fitmate.datamodel.CenterInfo
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -24,9 +28,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_login.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import androidx.recyclerview.widget.DiffUtil
-import com.jakewharton.rxbinding2.view.focusChanges
-import com.jakewharton.rxbinding2.widget.textChanges
 
 
 /**
@@ -60,8 +61,9 @@ class LoginFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
+        //appComponent.inject(this)
 
         searchCenterResultViewModel = viewModel(viewModelFactory) {
             observe(centers, ::renderCenterList)

@@ -29,7 +29,7 @@ import com.yhan.fitmate.R.color
 import com.yhan.fitmate.core.di.ApplicationComponent
 import com.yhan.fitmate.core.extension.appContext
 import com.yhan.fitmate.core.extension.viewContainer
-import kotlinx.android.synthetic.main.toolbar.progress
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 /**

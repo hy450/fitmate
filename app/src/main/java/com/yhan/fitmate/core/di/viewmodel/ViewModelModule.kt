@@ -33,7 +33,9 @@ abstract class ViewModelModule {
     @ViewModelKey(CenterSearchViewModel::class)
     abstract  fun bindsCenterSearchViewModel(centerSearchViewModel: CenterSearchViewModel) : ViewModel
 
-    @Binds @IntoMap @ViewModelKey(LoginViewModel::class)
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
     abstract  fun bindsLoginViewModel( loginViewModel: LoginViewModel) : ViewModel
 
 

@@ -15,19 +15,29 @@
  */
 package com.yhan.fitmate.core.di
 
+import android.app.Application
 import com.yhan.fitmate.AndroidApplication
 import com.yhan.fitmate.core.di.viewmodel.ViewModelModule
-import com.yhan.fitmate.core.navigation.RouteActivity
-import com.yhan.fitmate.feature.login.LoginFragment
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class])
+@Component(modules = [ApplicationModule::class,
+                        ViewModelModule::class,
+                        AndroidInjectionModule::class,
+                        ActivityBuilder::class])
 interface ApplicationComponent {
-    fun inject(application: AndroidApplication)
-    fun inject(routeActivity: RouteActivity)
 
-    fun inject(loginFragment: LoginFragment)
+    @Component.Builder
+    interface Builder {
+        @BindsInstance fun application(application: Application) : Builder
+        fun build(): ApplicationComponent
+    }
+
+    fun inject(application: AndroidApplication)
+    //fun inject(routeActivity: RouteActivity)
+    //fun inject(loginFragment: LoginFragment)
     
 }
