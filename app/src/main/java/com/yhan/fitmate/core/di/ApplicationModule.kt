@@ -20,7 +20,6 @@ import android.content.Context
 import com.yhan.fitmate.BuildConfig
 import com.yhan.fitmate.data.CenterRepository
 import com.yhan.fitmate.data.UserRepository
-import com.yhan.fitmate.feature.login.LoginFragmentComponent
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,7 +29,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module( subcomponents = [RouteActivityComponent::class, LoginFragmentComponent::class])
+@Module
 class ApplicationModule {
 
     @Provides @Singleton fun provideApplicationContext(application: Application): Context = application
