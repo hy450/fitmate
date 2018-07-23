@@ -16,13 +16,18 @@
 package com.yhan.fitmate.core.navigation
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.View
+import com.yhan.fitmate.core.di.OpenClassOnDebug
+import com.yhan.fitmate.core.extension.debug
 import com.yhan.fitmate.feature.login.Authenticator
 import com.yhan.fitmate.feature.login.LoginActivity
+import com.yhan.fitmate.feature.main.MainActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
+@OpenClassOnDebug
 @Singleton
 class Navigator
 @Inject constructor(private val authenticator: Authenticator) {
@@ -31,11 +36,14 @@ class Navigator
 
     private fun showLogin(context: Context) = context.startActivity( LoginActivity.callingIntent(context))
 
-    private fun showMain1(context: Context) {
+    private fun showMain1(context: Context) =
+        context.startActivity( MainActivity.callingIntent(context))
 
-    }
 
     fun showMain(context: Context) {
+
+        debug( "showMain :: ${authenticator.userLoggedIn()}")
+
         when (authenticator.userLoggedIn()) {
             true -> showMain1(context)
             false -> showLogin(context)

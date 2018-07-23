@@ -2,6 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-allopen'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+    }
+}
+
+allOpen {
+    annotation("com.yhan.fitmate.core.di.OpenClass")
+}
 
 android {
     compileSdkVersion 28
@@ -32,6 +46,8 @@ ext {
     daggerVersion = '2.16'
     retrofitVersion = '2.3.0'
     okhttpVersion = '3.10.0'
+    testrunner_version = '1.1.0-alpha3'
+    mockito_version = '2.18.3'
     //main application --]]
 }
 
@@ -87,8 +103,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
     testImplementation 'org.amshove.kluent:kluent:1.14'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVersion"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:$daggerVersion"
+    androidTestImplementation "androidx.test:runner:$testrunner_version"
+    androidTestImplementation "androidx.test:rules:$testrunner_version"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.1.0-alpha3"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
+
 
 }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yhan.fitmate.R
+import com.yhan.fitmate.core.extension.debug
 import com.yhan.fitmate.datamodel.CenterInfo
 
 class CenterSrchResultRecyclerAdapter(private val context: Context, private val onClick: (CenterInfo) -> Unit )
@@ -25,10 +26,12 @@ class CenterSrchResultRecyclerAdapter(private val context: Context, private val 
         val centerName = holder.itemView.findViewById<TextView>(R.id.centerName)
         val centerAddress = holder.itemView.findViewById<TextView>(R.id.centerAddress)
 
-        centerName.text = centers[position].gym_name
-        centerAddress.text = centers[position].gym_address
+        centerName.text = centers[holder.adapterPosition].gym_name
+        centerAddress.text = centers[holder.adapterPosition].gym_address
 
-        holder.itemView.setOnClickListener { onClick(centers[position]) }
+        debug("position : ${position}")
+
+        holder.itemView.setOnClickListener { onClick(centers[holder.adapterPosition]) }
 
     }
 

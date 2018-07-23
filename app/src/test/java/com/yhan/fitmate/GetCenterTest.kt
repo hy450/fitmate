@@ -25,8 +25,7 @@ class GetCenterTest : UnitTest(){
 
     @Before fun setUp() {
         getCenter = GetCenter(centerRepository)
-        given { centerRepository.searchCenter("SC",1) }
-                .willReturn(Either.Right(centerList))
+        given { centerRepository.searchCenter("SC",1) }.willReturn(Either.Right(centerList))
     }
 
     @Test fun `should get return center info`() {

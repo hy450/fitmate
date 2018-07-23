@@ -20,6 +20,8 @@ import android.content.Context
 import com.yhan.fitmate.BuildConfig
 import com.yhan.fitmate.data.CenterRepository
 import com.yhan.fitmate.data.UserRepository
+import com.yhan.fitmate.feature.login.Authenticator
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,6 +31,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@OpenClassOnDebug
 @Module
 class ApplicationModule {
 
