@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.focusChanges
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxbinding2.widget.textChanges
@@ -86,7 +87,7 @@ class LoginFragment : BaseFragment() {
         debug("LoginFragment create")
 
         centerSrchResultList.adapter = centerSrchResultRecyclerAdapter
-        centerSrchResultList.layoutManager = LinearLayoutManager( context, LinearLayout.VERTICAL,false)
+        centerSrchResultList.layoutManager = LinearLayoutManager( context, RecyclerView.VERTICAL,false)
 
         regBtnClickListener()
         regCenterSearchListener()
